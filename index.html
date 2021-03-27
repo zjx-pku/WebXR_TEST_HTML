@@ -1,0 +1,46 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>changeImage</title>
+    <meta name="description" content="changeImage" />
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-keyboard-controls/a9c513fc/dist/aframe-keyboard-controls.js"></script>
+</head>
+
+<script>
+    var img_index = 2;
+</script>
+<script>
+    AFRAME.registerComponent('keytest', {
+    dependencies: ['keyboard-controls'],
+
+    init: function () {
+
+        //I Keydown
+        this.el.addEventListener('keydown:KeyI', (e) => { 
+            var image = document.querySelector("a-sky");
+            image.setAttribute("src", "/preview/data/"+img_index.toString().padStart(4,"0") +".png");
+            img_index += 1;
+        });
+
+        //K Jeydown
+        this.el.addEventListener('keydown:KeyJ', (e) => { 
+            console.log("J Key down")
+        });
+    },
+});
+</script>
+<body>
+    <a-scene keytest>
+        <!--Sky-->
+        <a-sky src="/preview/data/0001.png" position="0 0 0"></a-sky>
+        <!--Camera-->
+        <a-entity id="cameraRig" position="0 0 0" rotation="0 0 0">
+            <a-entity id="head" camera wasd-controls look-controls position="0 1.6 0"></a-entity>
+        </a-entity>
+
+    </a-scene>
+</body>
+
+</html>
